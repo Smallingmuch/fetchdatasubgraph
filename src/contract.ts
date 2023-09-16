@@ -68,7 +68,7 @@ export function handlePauserRemoved(event: PauserRemovedEvent): void {
 }
 
 export function handleTransfer(event: TransferEvent): void {
-  let entity = new Transfer(
+  let entity = new MaticTransfer(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.from = event.params.from
@@ -78,6 +78,7 @@ export function handleTransfer(event: TransferEvent): void {
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp
   entity.transactionHash = event.transaction.hash
+  entity.token = event.address
 
   entity.save()
 }
